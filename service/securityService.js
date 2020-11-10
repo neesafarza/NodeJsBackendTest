@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/users')
+const crypto = require('crypto')
 
 exports.getUserFromToken = (req) => {
   if(req.headers && req.headers.authorization) {
@@ -9,3 +10,5 @@ exports.getUserFromToken = (req) => {
     throw new Error('No Token found');
   }
 }
+
+exports.SECRET_KEY = crypto.randomBytes(32).toString();

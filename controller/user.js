@@ -2,7 +2,8 @@ const User = require('../models/users')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { convertDomainToDTO } = require('../service/userService');
-const SECRET_KEY = 'secretkey'
+
+const SECRET_KEY = require('../service/securityService').SECRET_KEY
 
 exports.createUser = async (req, res) => {
   try {
@@ -20,7 +21,7 @@ exports.createUser = async (req, res) => {
       location: { type: 'Point', coordinates: [req.body.longitude, req.body.latitude] }
     });
 
-    const accessToken = jwt.sign({ email }, 'secretkey');
+    const accessToken = jwt.sign({ email }, SECRET_KEY);
     res.json({
       accessToken,
       user: convertDomainToDTO(createdUser)

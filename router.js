@@ -3,7 +3,8 @@ const user = require('./controller/user')
 const review = require('./controller/review')
 const location = require('./controller/location')
 const { withJWTAuthMiddleware } = require("express-kun");
-const protectedRouter = withJWTAuthMiddleware(router, "secretkey");
+const SECRET_KEY = require('./service/securityService').SECRET_KEY
+const protectedRouter = withJWTAuthMiddleware(router, SECRET_KEY);
 
 router.post('/users/signup', user.createUser);
 router.post('/users/login', user.login );
