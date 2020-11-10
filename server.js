@@ -4,7 +4,6 @@ const cors = require('cors');
 // eslint-disable-next-line no-unused-vars
 const mongoose = require('./models/index')
 const router = require('./router');
-const jwt = require('express-jwt');
 const app = express();
 const PORT = 8080;
 
@@ -14,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 app.use(router);
 
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   if (err.name === 'UnauthorizedError') {
     res.status(401).send('invalid token...');
   }
