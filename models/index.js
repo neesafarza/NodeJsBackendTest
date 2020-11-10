@@ -1,6 +1,9 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/techTest', {
+const dbUrl = process.env.DB_URL;
+
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
